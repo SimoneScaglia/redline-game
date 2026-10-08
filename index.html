@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>REDLINE</title>
+  <meta name="description" content="REDLINE — leggi il motore del rivale, punta il minimo che basta a batterlo. Un gioco di intuito, non d'azzardo." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="app">
+    <div id="stage">
+      <canvas id="scene"></canvas>
+
+      <!-- HUD superiore -->
+      <div id="hud" class="hud hidden">
+        <div class="hud-cell">
+          <span class="hud-label">MANO</span>
+          <span id="hud-round" class="hud-value">1</span>
+        </div>
+        <div id="hud-timer-cell" class="hud-cell hud-timer-cell">
+          <div id="timer-track" class="timer-track"><div id="timer-fill" class="timer-fill"></div></div>
+          <span id="hud-timer" class="hud-sub">45s</span>
+        </div>
+        <div class="hud-cell hud-right">
+          <span class="hud-label">GETTONI</span>
+          <span id="hud-bank" class="hud-value">200</span>
+        </div>
+      </div>
+
+      <!-- Istruzione fase lettura -->
+      <div id="staging-bar" class="staging-bar hidden">
+        <p class="staging-text">Osserva il rivale.</p>
+        <button id="ready-btn" class="btn btn-ghost">Sono pronto → Punta</button>
+      </div>
+
+      <!-- Pannello puntata -->
+      <div id="betting" class="panel betting hidden">
+        <h2 class="panel-title">COSTRUISCI IL MOTORE</h2>
+        <p class="panel-sub">Quanta potenza ci metti? Vinci la gara se la tua potenza ≥ quella del rivale.</p>
+        <div class="power-readout">
+          <span class="power-big"><span id="bet-val">400</span><span class="power-unit">CV</span></span>
+        </div>
+        <input id="bet-slider" class="slider" type="range" min="360" max="450" value="400" step="1" />
+        <div class="scale-row">
+          <span id="scale-min">360</span><span id="scale-max">450</span>
+        </div>
+        <div id="payoff" class="payoff">
+          <div class="payoff-win">Se vinci <b id="pay-win">+60</b></div>
+          <div class="payoff-lose">Se perdi <b id="pay-lose">−50</b></div>
+        </div>
+        <div class="btn-row">
+          <button id="fold-btn" class="btn btn-ghost">PASSA (non corro)</button>
+          <button id="launch-btn" class="btn btn-primary">LANCIA 🏁</button>
+        </div>
+      </div>
+
+      <!-- Risultato -->
+      <div id="result" class="panel result hidden">
+        <h2 id="result-title" class="result-title">VITTORIA</h2>
+        <div class="result-grid">
+          <div class="result-col">
+            <span class="result-k">RIVALE</span>
+            <span id="result-p" class="result-v">0</span><span class="result-u">CV</span>
+          </div>
+          <div class="result-vs">vs</div>
+          <div class="result-col">
+            <span class="result-k">TU</span>
+            <span id="result-b" class="result-v">0</span><span class="result-u">CV</span>
+          </div>
+        </div>
+        <div id="result-net" class="result-net">+60 gettoni</div>
+        <button id="next-btn" class="btn btn-primary">PROSSIMA MANO →</button>
+      </div>
+
+      <!-- Start -->
+      <div id="start" class="panel start">
+        <div class="logo">RED<span>LINE</span></div>
+        <p class="tagline">Leggi il motore. Punta il minimo che basta.</p>
+        <div class="how">
+          <p><b>Come si gioca</b></p>
+          <ol>
+            <li>Il rivale ha una potenza <b>nascosta</b> (360–460 CV).</li>
+            <li>Durante lo staging le sue spie animate si muovono. <b>Osservale.</b></li>
+            <li>Poi scegli la potenza del tuo motore (360–450 CV). <b>Vinci se ≥ quella del rivale.</b></li>
+            <li>Più tieni bassa la potenza, più gettoni vinci; se perdi, perdi quanto hai rischiato.</li>
+            <li>Puoi anche <b>passare</b> e non correre.</li>
+          </ol>
+        </div>
+        <div class="diff-wrap">
+          <span class="diff-label">DIFFICOLTÀ</span>
+          <div id="difficulty" class="segmented">
+            <button type="button" data-diff="facile" class="seg-btn">Facile</button>
+            <button type="button" data-diff="medio" class="seg-btn">Medio</button>
+            <button type="button" data-diff="difficile" class="seg-btn">Difficile</button>
+          </div>
+        </div>
+        <button id="start-btn" class="btn btn-primary btn-big">ACCENDI IL MOTORE</button>
+      </div>
+
+      <!-- Game over -->
+      <div id="gameover" class="panel gameover hidden">
+        <h2 class="result-title lose">MOTORE FUSO</h2>
+        <p class="panel-sub">Gettoni finiti.</p>
+        <div id="go-stats" class="go-stats"></div>
+        <button id="restart-btn" class="btn btn-primary">RICOMINCIA</button>
+      </div>
+    </div>
+    <p class="credit">REDLINE · prototipo</p>
+  </div>
+
+  <script src="js/rng.js" defer></script>
+  <script src="js/model.js" defer></script>
+  <script src="js/render.js" defer></script>
+  <script src="js/game.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+# Claude Code / local tooling
+.claude/
+
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# Node (not used yet, but just in case)
+node_modules/
+npm-debug.log*
+
+# Python server cruft
+__pycache__/
+*.pyc
